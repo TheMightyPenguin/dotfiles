@@ -1,0 +1,13 @@
+[alias]
+	dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+	today = log --since=7am
+[user]
+	email = victor.tortolero@wizeline.com
+	name = Victor Tortolero
+[core]
+	excludesfile = /Users/victor.tortolero/.gitignore_global
+	editor = nvim
+[diff]
+	tool = default-difftool
+[difftool "default-difftool"]
+	cmd = code --wait --diff $LOCAL $REMOTE
