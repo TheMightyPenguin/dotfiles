@@ -293,17 +293,12 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 alias pynstall='CFLAGS="-I$(brew --prefix openssl)/include" LDFLAGS="-L$(brew --prefix openssl)/lib" pyenv install -v'
 
-# rbenv stuff
-eval "$(rbenv init -)"
-
 # To make rack fork work on Mojave
 # @see: https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # PostgreSQL bin path
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/10/bin
-
-export DISNEY_ESLINTRC_PATH='~/.disney_eslintrc.json'
 
 # bullet train theme stuff
 BULLETTRAIN_CONTEXT_DEFAULT_USER="victor.tortolero"
@@ -317,34 +312,8 @@ BULLETTRAIN_RUBY_PREFIX='💎'
 SPACESHIP_CHAR_SYMBOL="$(echo $emoji[penguin]) "
 SPACESHIP_GIT_BRANCH_SHOW=false
 
-# Disney Aliases
-alias be='bundle exec'
-alias zms='mtt_cms_api_uri=http://localhost:3003/ be rake server'
-alias zms2='mtt_cms_api_uri=https://cms-dev2.mh.disney.io/ be rake server'
-alias zms3='mtt_cms_api_uri=https://cms-dev3.mh.disney.io/ be rake server'
-alias zms6='mtt_cms_api_uri=https://cms-dev6.mh.disney.io/ mtt_search_api_uri=https://search-qa.mh.disney.io:443/ be rake server'
-alias zmsl='mtt_cms_api_uri=http://cms.local.diznee.net:3003 mtt_search_api_uri=https://search-qa.mh.disney.io:443/ be rake server'
-alias zms6thin='mtt_cms_api_uri=https://cms-dev6.mh.disney.io/ mtt_search_api_uri=https://search-qa.mh.disney.io:443/ be thin -p 9292 start'
-alias zmsd='mtt_cms_api_uri=https://cms-demo.mh.disney.io/ be rake server'
-alias zmsp='mtt_cms_api_uri=http://cms.diznee.net/ be rake server'
-alias zmsq='mtt_cms_api_uri=https://cms-qa.mh.disney.io/ be rake server'
-alias disnginx='sudo nginx -c /usr/local/etc/nginx/config/nginx.conf'
-alias stopnginx='sudo nginx -s stop'
-alias zcos='mtt_gql_env=local be rake server'
-alias zcos6='mtt_gql_env=dev6 be rake server'
-alias zchrome6='mtt_cms_api_uri=https://cms-dev6.mh.disney.io/ rackup'
-
 # iPhone simulator
 alias iosim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
-
-# Connect to your instance:
-alias fastai='ssh -i /Users/victor.tortolero/.ssh/aws-key-fast-ai.pem ubuntu@ec2-52-37-201-192.us-west-2.compute.amazonaws.com'
-# Stop your instance:
-alias fastaistop='aws ec2 stop-instances --instance-ids i-07cc3fb47a79085c3'
-# Start your instance:
-alias fastaistart='aws ec2 start-instances --instance-ids i-07cc3fb47a79085c3'
-# Reboot your instance:
-alias fastaireboot='aws ec2 reboot-instances --instance-ids i-07cc3fb47a79085c3'
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -369,11 +338,6 @@ if [ -f '/Users/victor.tortolero/google-cloud-sdk/completion.zsh.inc' ]; then so
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# GO stuff
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$(go env GOPATH)/bin
-export GOPATH=$(go env GOPATH)
 
 current_dir() {
     echo "%{$terminfo[bold]$FG[228]%}%~%{$reset_color%}"
