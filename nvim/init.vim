@@ -8,10 +8,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'haishanh/night-owl.vim'
 Plug 'google/vim-searchindex'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'HerringtonDarkholme/yats.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'codehearts/mascara-vim'
+" Plug 'codehearts/mascara-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -19,14 +18,24 @@ Plug 'Yggdroot/indentLine'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 Plug 'jparise/vim-graphql'
-"Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 "
+
+Plug 'flazz/vim-colorschemes'
+
+Plug 'junegunn/vim-easy-align'
+
+Plug 'liuchengxu/vim-clap'
+
+" tmux
+Plug 'christoomey/vim-tmux-navigator'
 
 " Text Objects
 Plug 'kana/vim-textobj-user'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'kana/vim-textobj-entire'
+Plug 'tpope/vim-commentary'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -48,14 +57,28 @@ Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" Alredy used by polyglot
+" Plug 'HerringtonDarkholme/yats.vim'
+"
+
+" themes
+Plug 'hzchirs/vim-material'
+Plug 'jdkanani/vim-material-theme'
+
+
 " This plugin should always be last
 Plug 'ryanoasis/vim-devicons'
+
+
 
 call plug#end()
 
 " set leader as space
 let mapleader=' '
 let g:vim_markdown_conceal = 0
+
+" treat all numbers as decimals
+set nrformats-=octal
 
 " CamelCaseMotion config
 let g:camelcasemotion_key = '<leader>'
@@ -66,6 +89,8 @@ nnoremap <silent> gh :call CocAction('doHover')<CR>
 nmap <silent> <Leader>m <Plug>(coc-diagnostic-prev)
 nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
 nnoremap <Leader>f :GoFmt<CR>
+
+command! -nargs=0 Format :call CocAction('format')
 
 " Go to definition in new split
 " map <C-b> :NERDTreeToggle %<CR>
@@ -85,6 +110,8 @@ map <C-e> :e %:h/
 
 " Comment block
 nnoremap <Leader>cib viw<Leader>cc;
+
+" navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
@@ -103,6 +130,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 nmap <leader>rn <Plug>(coc-rename)
 
+nmap <leader>qf  <Plug>(coc-fix-current)
+
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
@@ -117,16 +146,25 @@ nnoremap <C-p> :Files<CR>
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-"inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? "\<C-n>" :
-      "\ <SID>check_back_space() ? "\<TAB>" :
-      "\ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <Tab> and <S-Tab> to navigate the completion
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Close the preview window when completion is done
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -204,8 +242,37 @@ let g:gruvbox_italic=1
 " colorscheme gruvbox
 " colorscheme onehalflight
 " let g:airline_theme='onehalfdark'
-colorscheme onehalfdark
+" colorscheme onehalfdark
+" colorscheme cobalt2
+colorscheme birds-of-paradise
 " let g:airline_theme='onehalflight'
+
+" Material theme https://github.com/hzchirs/vim-material
+" Dark
+" set background=dark
+" colorscheme vim-material
+" Palenight
+" let g:material_style='palenight'
+" set background=dark
+" colorscheme vim-material
+" Oceanic
+" let g:material_style='oceanic'
+" set background=dark
+" colorscheme vim-material
+" Light
+" set background=light
+" colorscheme vim-material
+" Material Airline
+" let g:airline_theme='material'
+
+" Vim Material Theme https://github.com/jdkanani/vim-material-theme
+" syntax enable
+" set background=dark
+" colorscheme material-theme
+" light
+" syntax enable
+" set background=light
+" colorscheme material-theme
 
 " for clipboard support out of vim
 set clipboard^=unnamedplus
@@ -218,10 +285,10 @@ let g:gitgutter_override_sign_column_highlight = 0
 highlight clear SignColumn
 
 " Polyglot
-let g:polyglot_disabled = ['typescript', 'tsx']
+" let g:polyglot_disabled = ['typescript', 'tsx']
 
 " vim-airline
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 " let g:airline_theme='night_owl'
 " Flame looking arrow
 "let g:airline_left_sep = "\uE0C0"
@@ -253,6 +320,16 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " NERDCommenter
 let g:NERDSpaceDelims = 1
+
+
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" remap increment
+nnoremap <C-c> <C-a>
 
 
 " Veonim config!!
