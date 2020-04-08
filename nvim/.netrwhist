@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/victor.tortolero/git/wizeline/banorte-poc/frontend/pages'
-let g:netrw_dirhist_2='/Users/victor.tortolero/git/wizeline/banorte-poc/components/GraphEditor'
-let g:netrw_dirhist_3='/Users/victor.tortolero/git/TheMightyPenguin/react-digraph/src/components'
-let g:netrw_dirhist_4='/Users/victor.tortolero/git/wizeline/banorte-poc/components/GraphEditor'

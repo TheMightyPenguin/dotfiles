@@ -242,9 +242,9 @@ let g:gruvbox_italic=1
 " colorscheme gruvbox
 " colorscheme onehalflight
 " let g:airline_theme='onehalfdark'
-" colorscheme onehalfdark
+colorscheme onehalfdark
 " colorscheme cobalt2
-colorscheme birds-of-paradise
+" colorscheme birds-of-paradise
 " let g:airline_theme='onehalflight'
 
 " Material theme https://github.com/hzchirs/vim-material

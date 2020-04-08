@@ -19,7 +19,6 @@
     "vue"
   ],
   "eslint.autoFixOnSave": false,
-  "solargraph.commandPath": "/Users/victor.tortolero/.rbenv/shims/solargraph",
   "emmet.includeLanguages": {
     "html.mustache": "html"
   },
@@ -44,5 +43,6 @@
       "settings": {},
       "rootPatterns": [".flowconfig"]
     }
-  }
+  },
+  "python.linting.flake8Enabled": true
 }
