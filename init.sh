@@ -1,6 +1,7 @@
 # Install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+xcode-select --install
 
 # taps
 brew tap aws/tap
@@ -45,6 +46,7 @@ brew cask install iterm2
 brew cask install docker
 brew cask install vlc
 brew cask install kitty
+brew cask install google-chrome
 
 
 # install vim plug
