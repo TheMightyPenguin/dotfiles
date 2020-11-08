@@ -239,10 +239,10 @@ let g:gruvbox_italic=1
 " Theme "
 " colorscheme night-owl
 " colorscheme dracula
-" colorscheme gruvbox
+colorscheme gruvbox
 " colorscheme onehalflight
 " let g:airline_theme='onehalfdark'
-colorscheme onehalfdark
+" colorscheme onehalfdark
 " colorscheme cobalt2
 " colorscheme birds-of-paradise
 " let g:airline_theme='onehalflight'

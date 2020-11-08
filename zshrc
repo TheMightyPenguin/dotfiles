@@ -1,6 +1,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Start TMUX automatically
 export ZSH_TMUX_AUTOSTART=true
@@ -44,7 +45,6 @@ if [[ $OSTYPE = (darwin)* ]]; then
   zplug "plugins/macports",      from:oh-my-zsh, if:"(( $+commands[port] ))"
 fi
 
-zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
 zplug "plugins/node",              from:oh-my-zsh, if:"(( $+commands[node] ))"
 zplug "plugins/npm",               from:oh-my-zsh, if:"(( $+commands[npm] ))"
 zplug "plugins/pip",               from:oh-my-zsh, if:"(( $+commands[pip] ))"
@@ -103,7 +103,7 @@ SPACESHIP_CHAR_SYMBOL="$(echo $emoji[penguin]) "
 SPACESHIP_GIT_BRANCH_SHOW=false
 
 # iPhone simulator
-alias iosim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
+alias iosim='open -a Simulator'
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -131,6 +131,19 @@ alias emojilog='! git log --oneline --color | emojify | less -r'
 current_dir() {
     echo "%{$terminfo[bold]$FG[228]%}%~%{$reset_color%}"
 }
+
+# # GIT Alias
+# # Took from https://thoughtbot.com/upcase/videos/intro-to-dotfiles
+g() {
+    if [[ $# > 0 ]]; then
+      git $@
+    else
+      git status
+    fi
+}
+
+# # Complete go like git
+compdef g=git
 
 # Custom Prompt
 # PROMPT="╭─[$(echo "%{$terminfo[bold]$FG[228]%}%~%{$reset_color%}")]
@@ -160,9 +173,6 @@ setopt share_history
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/.ghcup/bin:$PATH
 
-# fnm
-eval "$(fnm env --multi)"
-
 # set yarn to use current node version
 yarn config set prefix $(npm prefix -g) &> /dev/null
 
@@ -177,19 +187,26 @@ if [ -f '/Users/victor.tortolero/google-cloud-sdk/completion.zsh.inc' ]; then . 
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
-# rbenv
-eval "$(rbenv init -)"
-
-fillbucket() {
-  gsutil -m cp -r "gs://etl-dev-1b5b38d3-d2df-4da7-8a71-59cc3b2c7db0/raw_files/bhi/100_members/PROFESSIONAL_CLAIMS/" "gs://sftp-storage-alabama-bcbs-49b5-ysa9/alabama-bcbs/$1/PROFESSIONAL_CLAIMS"
-  gsutil -m cp -r "gs://etl-dev-1b5b38d3-d2df-4da7-8a71-59cc3b2c7db0/raw_files/bhi/100_members/FACILITY_CLAIM_DETAIL/" "gs://sftp-storage-alabama-bcbs-49b5-ysa9/alabama-bcbs/$1/FACILITY_CLAIM_DETAIL"
-  gsutil -m cp -r "gs://etl-dev-1b5b38d3-d2df-4da7-8a71-59cc3b2c7db0/raw_files/bhi/100_members/FACILITY_CLAIM_HEADER/" "gs://sftp-storage-alabama-bcbs-49b5-ysa9/alabama-bcbs/$1/FACILITY_CLAIM_HEADER"
-  gsutil -m cp -r "gs://etl-dev-1b5b38d3-d2df-4da7-8a71-59cc3b2c7db0/raw_files/bhi/100_members/MEMBER/" "gs://sftp-storage-alabama-bcbs-49b5-ysa9/alabama-bcbs/$1/MEMBER"
-  gsutil -m cp -r "gs://etl-dev-1b5b38d3-d2df-4da7-8a71-59cc3b2c7db0/raw_files/bhi/100_members/PHARMACY_CLAIMS/" "gs://sftp-storage-alabama-bcbs-49b5-ysa9/alabama-bcbs/$1/PHARMACY_CLAIMS"
-  gsutil -m cp -r "gs://etl-dev-1b5b38d3-d2df-4da7-8a71-59cc3b2c7db0/raw_files/bhi/100_members/MEMBER_ENROLLMENT/" "gs://sftp-storage-alabama-bcbs-49b5-ysa9/alabama-bcbs/$1/MEMBER_ENROLLMENT"
-}
-
 alias code='code-insiders'
 
-# Added by serverless binary installer
-export PATH="$HOME/.serverless/bin:$PATH"
+# asdf https://asdf-vm.com/#/core-manage-asdf-vm
+. $(brew --prefix asdf)/asdf.sh
+
+source ~/.local/bin/aws_zsh_completer.sh
+
+# flutter
+export PATH="$PATH:`pwd`/flutter/bin"
+
+# terraform
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+
+# fnm
+export PATH=/Users/victor.tortolero/.fnm:$PATH
+eval "`fnm env --multi`"
+
+alias vim='nvim'
+
+# for rcm
+# https://github.com/thoughtbot/rcm
+export RCRC=rcrc
