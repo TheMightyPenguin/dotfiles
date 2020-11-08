@@ -5,6 +5,7 @@ xcode-select --install
 
 # taps
 brew tap aws/tap
+brew tap homebrew/cask-drivers
 
 
 # brew installs
@@ -47,6 +48,7 @@ brew cask install docker
 brew cask install vlc
 brew cask install kitty
 brew cask install google-chrome
+brew cask install logitech-options
 
 
 # install vim plug
