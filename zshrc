@@ -1,5 +1,15 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Android Studio paths for react-native
+# https://reactnative.dev/docs/environment-setup
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME="$(/usr/libexec/java_home)"
+
+
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -210,3 +220,4 @@ alias vim='nvim'
 # for rcm
 # https://github.com/thoughtbot/rcm
 export RCRC=rcrc
+export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"

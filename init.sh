@@ -10,6 +10,7 @@ brew tap homebrew/cask-drivers
 
 # brew installs
 brew install ripgrep
+brew install the_silver_searcher
 brew install neovim
 brew install pyenv
 brew install zsh
