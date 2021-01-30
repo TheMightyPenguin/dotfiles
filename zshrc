@@ -2,12 +2,14 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Android Studio paths for react-native
 # https://reactnative.dev/docs/environment-setup
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export JAVA_HOME="$(/usr/libexec/java_home)"
+if [[ `uname` == "Darwin"  ]]; then
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+  export JAVA_HOME="$(/usr/libexec/java_home)"
+fi
 
 
 export LANG=en_US.UTF-8
@@ -17,12 +19,10 @@ export LC_ALL=en_US.UTF-8
 export ZSH_TMUX_AUTOSTART=true
 
 # zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=~/.zplug
 source $ZPLUG_HOME/init.zsh
 
 # theme
-# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
 
@@ -41,6 +41,8 @@ zplug "plugins/history",           from:oh-my-zsh
 zplug "plugins/tmux",              from:oh-my-zsh
 zplug "plugins/urltools",          from:oh-my-zsh
 zplug "plugins/web-search",        from:oh-my-zsh
+zplug "plugins/asdf",        from:oh-my-zsh
+zplug "plugins/git",        from:oh-my-zsh
 
 # to move folders really fast (i.e.: `z frontend`)
 zplug "plugins/z",                 from:oh-my-zsh
@@ -90,8 +92,8 @@ export PATH=$PATH:$HOME/bin
 # yarn config set prefix `nodenv prefix` &> /dev/null
 
 # pyenv stuff 🐍
-eval "$(pyenv init -)"
-alias pynstall='CFLAGS="-I$(brew --prefix openssl)/include" LDFLAGS="-L$(brew --prefix openssl)/lib" pyenv install -v'
+# eval "$(pyenv init -)"
+# alias pynstall='CFLAGS="-I$(brew --prefix openssl)/include" LDFLAGS="-L$(brew --prefix openssl)/lib" pyenv install -v'
 
 # To make rack fork work on Mojave
 # @see: https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/
@@ -115,20 +117,7 @@ SPACESHIP_GIT_BRANCH_SHOW=false
 # iPhone simulator
 alias iosim='open -a Simulator'
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/victor.tortolero/.nodenv/versions/8.9.3/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/victor.tortolero/.nodenv/versions/8.9.3/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/victor.tortolero/.nodenv/versions/8.9.3/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/victor.tortolero/.nodenv/versions/8.9.3/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-
-export PATH=/Users/victor.tortolero/.local/bin:/opt/local/bin:/opt/local/sbin:/Applications/Octave.app/Contents/Resources/usr/Cellar/octave/4.0.3/bin:$PATH
-
 alias emojilog='! git log --oneline --color | emojify | less -r'
-
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/victor.tortolero/.nodenv/versions/11.6.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/victor.tortolero/.nodenv/versions/11.6.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -184,7 +173,7 @@ export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/.ghcup/bin:$PATH
 
 # set yarn to use current node version
-yarn config set prefix $(npm prefix -g) &> /dev/null
+# # yarn config set prefix $(npm prefix -g) &> /dev/null
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/victor.tortolero/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/victor.tortolero/google-cloud-sdk/path.zsh.inc'; fi
@@ -197,12 +186,12 @@ if [ -f '/Users/victor.tortolero/google-cloud-sdk/completion.zsh.inc' ]; then . 
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
-alias code='code-insiders'
+alias code=code-insiders
 
 # asdf https://asdf-vm.com/#/core-manage-asdf-vm
-. $(brew --prefix asdf)/asdf.sh
+# . $(brew --prefix asdf)/asdf.sh
 
-source ~/.local/bin/aws_zsh_completer.sh
+# source ~/.local/bin/aws_zsh_completer.sh
 
 # flutter
 export PATH="$PATH:`pwd`/flutter/bin"
@@ -211,13 +200,25 @@ export PATH="$PATH:`pwd`/flutter/bin"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
-# fnm
-export PATH=/Users/victor.tortolero/.fnm:$PATH
-eval "`fnm env --multi`"
-
 alias vim='nvim'
 
 # for rcm
 # https://github.com/thoughtbot/rcm
 export RCRC=rcrc
-export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
+
+# setting bres installed ruby path on osx
+if [[ `uname` == "Darwin"  ]]; then
+    export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
+fi
+
+clearfn () {clear;}
+zle -N clearfn
+bindkey "^;" clearfn
+
+# fnm
+export PATH=~/.fnm:$PATH
+eval "`fnm env`"
+
+# Added by Amplify CLI binary installer
+export PATH="$HOME/.amplify/bin:$PATH"
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)

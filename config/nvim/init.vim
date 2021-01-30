@@ -181,11 +181,13 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Quickly edit and source config files
 noremap <leader>ev :tabe ~/.config/nvim/init.vim<CR>
+noremap <leader>ewt :tabe /mnt/c/Program\ Files/WezTerm/wezterm.lua<CR>
 noremap <leader>es :tabe ~/.config/nvim/coc-settings.json<CR>
 noremap <leader>s :source ~/.config/nvim/init.vim<CR>
 noremap <leader>eg :tabe ~/.gitconfig<CR>
 noremap <leader>ek :tabe ~/.config/kitty/kitty.conf<CR>
 noremap <leader>et :tabe ~/.tmux.conf<CR>
+noremap <leader>ez :tabe ~/.zshrc<CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -339,11 +341,29 @@ if exists('veonim')
   nnoremap <silent> ,f :Veonim files<cr>
 endif
 
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
+
+let uname = substitute(system('uname'),'\n','','')
+if uname == 'Linux'
+  let lines = readfile("/proc/version")
+  if lines[0] =~ "microsoft"
+
+    " fix clipboard
+    let g:clipboard = {
+              \   'name': 'win32yank-wsl',
+              \   'copy': {
+              \      '+': 'win32yank.exe -i --crlf',
+              \      '*': 'win32yank.exe -i --crlf',
+              \   },
+              \   'paste': {
+              \      '+': 'win32yank.exe -o --lf',
+              \      '*': 'win32yank.exe -o --lf',
+              \   },
+              \   'cache_enabled': 0,
+              \ }
+
+  endif
 endif
+
 
 if $VIM_CRONTAB == "true"
   set nobackup
