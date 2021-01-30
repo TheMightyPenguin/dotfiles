@@ -55,3 +55,16 @@ brew cask install logitech-options
 # install vim plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# wsl specific
+
+if [[ `uname` == "Linux"   ]]; then
+    if grep -q microsoft /proc/version; then
+        ## Download win32yank
+        wget https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+        unzip win32yank-x64.zip
+        rm -rf README.md
+        rm -rf LICENSE
+        mv win32yank.exe ~/bin
+    fi
+fi
