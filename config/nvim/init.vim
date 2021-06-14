@@ -19,6 +19,7 @@ Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 Plug 'jparise/vim-graphql'
 Plug 'tpope/vim-surround'
+Plug 'jxnblk/vim-mdx-js'
 "
 
 Plug 'flazz/vim-colorschemes'
@@ -76,6 +77,9 @@ call plug#end()
 " set leader as space
 let mapleader=' '
 let g:vim_markdown_conceal = 0
+
+" for parcel hot reload to work
+set backupcopy=yes
 
 " treat all numbers as decimals
 set nrformats-=octal
@@ -363,6 +367,9 @@ if uname == 'Linux'
 
   endif
 endif
+
+" coc extensions
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-emmet', 'coc-elixir', 'coc-eslint', 'coc-graphql', 'coc-highlight']
 
 
 if $VIM_CRONTAB == "true"

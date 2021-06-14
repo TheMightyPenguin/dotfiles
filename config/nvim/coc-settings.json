@@ -11,14 +11,14 @@
     "html",
     "python"
   ],
-  "eslint.filetypes": [
+  "eslint.probe": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact",
     "vue"
   ],
-  "eslint.autoFixOnSave": false,
+  "eslint.autoFixOnSave": true,
   "emmet.includeLanguages": {
     "html.mustache": "html"
   },
@@ -26,22 +26,41 @@
   "languageserver": {
     "ocaml": {
       "command": "ocaml-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["ocaml", "reason"]
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "ocaml",
+        "reason"
+      ]
     },
     "golang": {
       "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "go"
+      ]
     },
     "flow": {
       "command": "flow",
-      "args": ["lsp"],
-      "filetypes": ["javascript", "javascriptreact"],
+      "args": [
+        "lsp"
+      ],
+      "filetypes": [
+        "javascript",
+        "javascriptreact"
+      ],
       "initializationOptions": {},
       "requireRootPattern": true,
       "settings": {},
-      "rootPatterns": [".flowconfig"]
+      "rootPatterns": [
+        ".flowconfig"
+      ]
     }
   },
   "python.linting.flake8Enabled": true

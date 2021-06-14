@@ -42,7 +42,6 @@ zplug "plugins/tmux",              from:oh-my-zsh
 zplug "plugins/urltools",          from:oh-my-zsh
 zplug "plugins/web-search",        from:oh-my-zsh
 zplug "plugins/asdf",        from:oh-my-zsh
-zplug "plugins/git",        from:oh-my-zsh
 
 # to move folders really fast (i.e.: `z frontend`)
 zplug "plugins/z",                 from:oh-my-zsh
@@ -133,7 +132,7 @@ current_dir() {
 
 # # GIT Alias
 # # Took from https://thoughtbot.com/upcase/videos/intro-to-dotfiles
-g() {
+function g {
     if [[ $# > 0 ]]; then
       git $@
     else
@@ -222,3 +221,22 @@ eval "`fnm env`"
 # Added by Amplify CLI binary installer
 export PATH="$HOME/.amplify/bin:$PATH"
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+alias oni=/mnt/c/Program\ Files/Onivim2/Oni2.exe
+
+# Deno
+export DENO_INSTALL=$HOME/.deno
+export PATH=$DENO_INSTALL/bin:$PATH
+
+# fnm
+export PATH=/home/victor/.fnm:$PATH
+eval "`fnm env`"
+
+# windows xserver thing
+export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+
+alias python=python2
+
+alias cra='npx create-react-app --use-npm'
+
+alias serve='npx http-server'
