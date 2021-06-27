@@ -20,6 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'jparise/vim-graphql'
 Plug 'tpope/vim-surround'
 Plug 'jxnblk/vim-mdx-js'
+Plug 'kevinoid/vim-jsonc'
 "
 
 Plug 'flazz/vim-colorschemes'
@@ -369,7 +370,7 @@ if uname == 'Linux'
 endif
 
 " coc extensions
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-emmet', 'coc-elixir', 'coc-eslint', 'coc-graphql', 'coc-highlight']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-emmet', 'coc-elixir', 'coc-eslint', 'coc-graphql', 'coc-highlight', 'coc-vimlsp']
 
 
 if $VIM_CRONTAB == "true"

@@ -2,7 +2,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Android Studio paths for react-native
 # https://reactnative.dev/docs/environment-setup
-if [[ `uname` == "Darwin"  ]]; then
+if [[ `uname` == "Darwin" && -a /usr/libexec/java_home  ]]; then
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator
   export PATH=$PATH:$ANDROID_HOME/tools
@@ -10,7 +10,6 @@ if [[ `uname` == "Darwin"  ]]; then
   export PATH=$PATH:$ANDROID_HOME/platform-tools
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
-
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -216,21 +215,15 @@ bindkey "^;" clearfn
 
 # fnm
 export PATH=~/.fnm:$PATH
-eval "`fnm env`"
+eval "$(fnm env)"
 
-# Added by Amplify CLI binary installer
-export PATH="$HOME/.amplify/bin:$PATH"
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-alias oni=/mnt/c/Program\ Files/Onivim2/Oni2.exe
+if [[ $OSTYPE = (linux)* ]]; then
+    alias oni=/mnt/c/Program\ Files/Onivim2/Oni2.exe
+fi
 
 # Deno
 export DENO_INSTALL=$HOME/.deno
 export PATH=$DENO_INSTALL/bin:$PATH
-
-# fnm
-export PATH=/home/victor/.fnm:$PATH
-eval "`fnm env`"
 
 # windows xserver thing
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"

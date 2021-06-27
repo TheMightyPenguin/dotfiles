@@ -1,7 +1,6 @@
-# Install brew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-xcode-select --install
+# Install fnm
+# https://github.com/Schniz/fnm
+curl -fsSL https://fnm.vercel.app/install | bash -s --  --skip-shell
 
 # taps
 brew tap aws/tap
@@ -11,7 +10,8 @@ brew tap homebrew/cask-drivers
 # brew installs
 brew install ripgrep
 brew install the_silver_searcher
-brew install neovim
+brew install --HEAD luajit
+brew install --HEAD neovim
 brew install pyenv
 brew install zsh
 brew install zplug
@@ -26,35 +26,35 @@ brew tap homebrew/cask-versions
 
 
 # brew cask apps
-brew cask install spotify
-brew cask install slack-beta
-brew cask install keepingyouawake
-brew cask install alfred
-brew cask install scroll-reverser
-brew cask install gitkraken
-brew cask install postgres
-brew cask install abstract
-brew cask install iterm
-brew cask install spectacle
-brew cask install visual-studio-code-insiders
-brew cask install zoomus
-brew cask install discord
-brew cask install keybase
-brew cask install telegram-desktop
-brew cask install postman
-brew cask install xmind-zen
-brew cask install grammarly
-brew cask install iterm2
-brew cask install docker
-brew cask install vlc
-brew cask install kitty
-brew cask install google-chrome
-brew cask install logitech-options
+# brew install --cask rectangle
+brew install --cask spotify
+brew install --cask slack-beta
+brew install --cask keepingyouawake
+brew install --cask alfred
+brew install --cask scroll-reverser
+brew install --cask postgres
+brew install --cask abstract
+brew install --cask iterm
+brew install --cask visual-studio-code-insiders
+brew install --cask discord
+brew install --cask telegram-desktop
+brew install --cask postman
+brew install --cask grammarly
+brew install --cask iterm2
+brew install --cask docker
+brew install --cask vlc
+brew install --cask kitty
+brew install --cask google-chrome
+brew install --cask logitech-options
 
 
 # install vim plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# install zplug
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
 
 # wsl specific
 

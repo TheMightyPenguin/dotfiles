@@ -45,22 +45,6 @@
       "filetypes": [
         "go"
       ]
-    },
-    "flow": {
-      "command": "flow",
-      "args": [
-        "lsp"
-      ],
-      "filetypes": [
-        "javascript",
-        "javascriptreact"
-      ],
-      "initializationOptions": {},
-      "requireRootPattern": true,
-      "settings": {},
-      "rootPatterns": [
-        ".flowconfig"
-      ]
     }
   },
   "python.linting.flake8Enabled": true
