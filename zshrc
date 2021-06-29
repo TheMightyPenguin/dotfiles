@@ -252,7 +252,7 @@ function ops {
 # brew
 case `uname` in
   Darwin)
-    # commands for OS X go here
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   ;;
   Linux)
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
