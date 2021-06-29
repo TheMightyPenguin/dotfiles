@@ -1,5 +1,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+~/.local.sh
+
 # Android Studio paths for react-native
 # https://reactnative.dev/docs/environment-setup
 if [[ `uname` == "Darwin" && -a /usr/libexec/java_home  ]]; then
@@ -233,3 +235,26 @@ alias python=python2
 alias cra='npx create-react-app --use-npm'
 
 alias serve='npx http-server'
+
+# keychain
+for filename in "${keychain_add_files[@]}"; do
+  keychain --nogui ~/.ssh/$filename
+done
+export HNAME=`hostname`
+source $HOME/.keychain/$HNAME-sh
+
+# 1password
+function ops {
+    eval $(op signin bstinson)
+}
+
+
+# brew
+case `uname` in
+  Darwin)
+    # commands for OS X go here
+  ;;
+  Linux)
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  ;;
+esac
