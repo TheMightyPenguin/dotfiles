@@ -18,7 +18,6 @@ brew install pyenv
 brew install zsh
 brew install zplug
 brew install tmux
-brew install fnm
 brew install fzf
 brew install keychain
 
