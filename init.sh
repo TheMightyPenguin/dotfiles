@@ -20,6 +20,7 @@ brew install zplug
 brew install tmux
 brew install fzf
 brew install keychain
+brew install gh
 
 
 # allow to install beta version of apps
@@ -31,13 +32,12 @@ brew install --cask rectangle
 brew install --cask spotify
 brew install --cask slack-beta
 brew install --cask keepingyouawake
-brew install --cask alfred
+brew install --cask raycast
+brew install --cask choosy
 brew install --cask scroll-reverser
-brew install --cask iterm
 brew install --cask visual-studio-code-insiders
 brew install --cask discord
 brew install --cask telegram-desktop
-brew install --cask postman
 brew install --cask iterm2
 brew install --cask docker
 brew install --cask kitty
@@ -68,8 +68,8 @@ fi
 
 
 # Node
-fnm install 14.16.1
-fnm default 14.16.1
+fnm install 16.17.0
+fnm default 16.17.0
 
 
 # Local config files from 1p

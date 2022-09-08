@@ -18,3 +18,5 @@
 	smudge = git-lfs smudge -- %f
 [credential]
 	helper = cache
+[init]
+	defaultBranch = main

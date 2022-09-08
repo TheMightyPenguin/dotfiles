@@ -1,16 +1,26 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# brew
+case `uname` in
+  Darwin)
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  ;;
+  Linux)
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  ;;
+esac
+
 ~/.local.sh
 
 # Android Studio paths for react-native
 # https://reactnative.dev/docs/environment-setup
-if [[ `uname` == "Darwin" && -a /usr/libexec/java_home  ]]; then
+if [[ `uname` == "Darwin" && -f /usr/libexec/java_home  ]]; then
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator
   export PATH=$PATH:$ANDROID_HOME/tools
   export PATH=$PATH:$ANDROID_HOME/tools/bin
   export PATH=$PATH:$ANDROID_HOME/platform-tools
-  export JAVA_HOME="$(/usr/libexec/java_home)"
+  export JAVA_HOME="$(/usr/libexec/java_home -v 11.0.13)"
 fi
 
 export LANG=en_US.UTF-8
@@ -25,7 +35,6 @@ source $ZPLUG_HOME/init.zsh
 
 # theme
 zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
 
 # zplug plugins
 zplug "plugins/common-aliases",    from:oh-my-zsh
@@ -68,12 +77,17 @@ ZSH_AUTOSUGGEST_STRATEGY=(history)
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
+# theme
+export PURE_PROMPT_SYMBOL="🐧"
+zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
+
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
 
 alias zshconfig="nvim ~/.zshrc"
 
@@ -175,12 +189,6 @@ export PATH=$HOME/.ghcup/bin:$PATH
 # set yarn to use current node version
 # # yarn config set prefix $(npm prefix -g) &> /dev/null
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/victor.tortolero/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/victor.tortolero/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/victor.tortolero/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/victor.tortolero/google-cloud-sdk/completion.zsh.inc'; fi
-
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
@@ -189,7 +197,7 @@ if [ -f '/Users/victor.tortolero/google-cloud-sdk/completion.zsh.inc' ]; then . 
 alias code=code-insiders
 
 # asdf https://asdf-vm.com/#/core-manage-asdf-vm
-# . $(brew --prefix asdf)/asdf.sh
+. $(brew --prefix asdf)/asdf.sh
 
 # source ~/.local/bin/aws_zsh_completer.sh
 
@@ -237,6 +245,7 @@ alias cra='npx create-react-app --use-npm'
 alias serve='npx http-server'
 
 # keychain
+keychain_add_files=(personal_gh teamflow)
 for filename in "${keychain_add_files[@]}"; do
   keychain --nogui ~/.ssh/$filename
 done
@@ -248,13 +257,23 @@ function ops {
     eval $(op signin bstinson)
 }
 
+alias mongod="mongod --dbpath=$HOME/data/db"
 
-# brew
-case `uname` in
-  Darwin)
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  ;;
-  Linux)
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  ;;
-esac
+export PATH="$PATH:$HOME/flutter/bin"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/victor/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/victor/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/victor/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/victor/google-cloud-sdk/completion.zsh.inc'; fi
+
+export HISTORY_IGNORE="*token*"
+
+# rust
+source $HOME/.cargo/env
+
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# xata
+export XATA_INSTALL="/Users/victor/.xata"
+export PATH="$XATA_INSTALL/bin:$PATH"

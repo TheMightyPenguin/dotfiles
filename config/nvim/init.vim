@@ -2,76 +2,11 @@
 " Plugins!!! "
 """"""""""""""
 
+" lua package.path = package.path .. ";~/.config/nvim"
+
+lua require('init')
+
 call plug#begin('~/.vim/plugged')
-
-Plug 'sheerun/vim-polyglot'
-Plug 'haishanh/night-owl.vim'
-Plug 'google/vim-searchindex'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'codehearts/mascara-vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'Yggdroot/indentLine'
-Plug 'ervandew/supertab'
-Plug 'tpope/vim-fugitive'
-Plug 'jparise/vim-graphql'
-Plug 'tpope/vim-surround'
-Plug 'jxnblk/vim-mdx-js'
-Plug 'kevinoid/vim-jsonc'
-"
-
-Plug 'flazz/vim-colorschemes'
-
-Plug 'junegunn/vim-easy-align'
-
-Plug 'liuchengxu/vim-clap'
-
-" tmux
-Plug 'christoomey/vim-tmux-navigator'
-
-" Text Objects
-Plug 'kana/vim-textobj-user'
-Plug 'vim-scripts/argtextobj.vim'
-Plug 'bkad/CamelCaseMotion'
-Plug 'kana/vim-textobj-entire'
-Plug 'tpope/vim-commentary'
-
-Plug 'airblade/vim-gitgutter'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'tpope/vim-eunuch'
-Plug 'tyru/open-browser.vim'
-Plug 'aklt/plantuml-syntax'
-Plug 'weirongxu/plantuml-previewer.vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
-" Plug 'scrooloose/vim-slumlord'
-"Plug 'justinmk/vim-dirvish'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'scrooloose/nerdtree'
-Plug 'machakann/vim-sandwich'
-Plug 'jiangmiao/auto-pairs'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'wellle/targets.vim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'morhetz/gruvbox'
-Plug 'sonph/onehalf', { 'rtp': 'vim/' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-" Alredy used by polyglot
-" Plug 'HerringtonDarkholme/yats.vim'
-"
-
-" themes
-Plug 'hzchirs/vim-material'
-Plug 'jdkanani/vim-material-theme'
-
-
-" This plugin should always be last
-Plug 'ryanoasis/vim-devicons'
-
-
 
 call plug#end()
 
@@ -91,6 +26,7 @@ let g:camelcasemotion_key = '<leader>'
 " Awesome keymaps!!!
 nnoremap <esc> :noh<CR><esc>
 nnoremap <silent> gh :call CocAction('doHover')<CR>
+nnoremap <silent> <Leader>a :CocAction<CR>
 nmap <silent> <Leader>m <Plug>(coc-diagnostic-prev)
 nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
 nnoremap <Leader>f :GoFmt<CR>
@@ -131,7 +67,7 @@ inoremap jj <ESC>
 noremap <leader>e :vsplit ~/.config/nvim/init.vim<CR>
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -247,6 +183,7 @@ let g:gruvbox_italic=1
 " colorscheme night-owl
 " colorscheme dracula
 colorscheme gruvbox
+" colorscheme tokyonight
 " colorscheme onehalflight
 " let g:airline_theme='onehalfdark'
 " colorscheme onehalfdark
@@ -338,6 +275,8 @@ nmap ga <Plug>(EasyAlign)
 " remap increment
 nnoremap <C-c> <C-a>
 
+set splitright
+
 
 " Veonim config!!
 if exists('veonim')
@@ -377,3 +316,12 @@ if $VIM_CRONTAB == "true"
   set nobackup
   set nowritebackup
 endif
+
+let g:vim_current_word#highlight_delay = 0
+
+command! Scratch lua require'tools'.makeScratch()
+
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
