@@ -5,9 +5,10 @@
 
 # Install rcm
 brew install rcm
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Clone dotfiles
-git clone git@github.com:TheMightyPenguin/dotfiles.git ~/.dotfiles
+git clone https://github.com/TheMightyPenguin/dotfiles.git ~/.dotfiles
 
 # Set up dotfiles with rc
 cd ~/.dotfiles
