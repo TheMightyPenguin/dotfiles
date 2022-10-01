@@ -8,17 +8,28 @@ if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-
-return require('packer').startup({function()
+return require('packer').startup({function(use)
   use 'wbthomason/packer.nvim'
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
   -- lsp
   use { 'neoclide/coc.nvim', branch = 'release' }
 
+
   -- syntax
-  use 'sheerun/vim-polyglot'
-  use 'jparise/vim-graphql'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    -- run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+  }
+  use 'nvim-treesitter/nvim-treesitter-context'
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  -- use 'sheerun/vim-polyglot'
+  -- use 'jparise/vim-graphql'
   use 'jxnblk/vim-mdx-js'
+
 
   -- editor quality of life
   use 'google/vim-searchindex'
@@ -28,11 +39,7 @@ return require('packer').startup({function()
   use 'kevinoid/vim-jsonc'
   use 'dominikduda/vim_current_word'
 
-  -- color schemes
-  use 'haishanh/night-owl.vim'
-  use 'folke/tokyonight.nvim'
-  use 'flazz/vim-colorschemes'
-  use { 'dracula/vim', as = 'dracula' }
+
 
   -- widgets
   use { 'junegunn/fzf', run = function() vim.fn['fzf#install'](0) end }
@@ -54,13 +61,15 @@ return require('packer').startup({function()
   use 'Yggdroot/indentLine'
   use 'ervandew/supertab'
 
-
   use 'junegunn/vim-easy-align'
 
   use 'liuchengxu/vim-clap'
 
   -- tmux
   use 'christoomey/vim-tmux-navigator'
+
+  -- nvim lua
+  use 'b0o/mapx.nvim'
 
 
   use 'airblade/vim-gitgutter'
@@ -78,13 +87,17 @@ return require('packer').startup({function()
   use 'ntpeters/vim-better-whitespace'
   use 'wellle/targets.vim'
   use 'edkolev/tmuxline.vim'
-  use 'morhetz/gruvbox'
-  use { 'sonph/onehalf', rtp = 'vim/' }
+
 
   -- themes
-  use 'hzchirs/vim-material'
-  use 'jdkanani/vim-material-theme'
-
+  use 'rrethy/nvim-base16'
+  use 'haishanh/night-owl.vim'
+  use 'folke/tokyonight.nvim'
+  use { 'dracula/vim', as = 'dracula' }
+  -- use 'morhetz/gruvbox'
+  -- use { 'sonph/onehalf', rtp = 'vim/' }
+  -- use 'hzchirs/vim-material'
+  -- use 'jdkanani/vim-material-theme'
 
   -- This plugin should always be last
   use 'ryanoasis/vim-devicons'
@@ -98,3 +111,4 @@ config = {
     open_fn = require('packer.util').float,
   }
 }})
+

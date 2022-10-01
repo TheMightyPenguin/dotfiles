@@ -182,7 +182,7 @@ let g:gruvbox_italic=1
 " Theme "
 " colorscheme night-owl
 " colorscheme dracula
-colorscheme gruvbox
+" colorscheme base16-gruvbox-dark-hard
 " colorscheme tokyonight
 " colorscheme onehalflight
 " let g:airline_theme='onehalfdark'
@@ -309,7 +309,7 @@ if uname == 'Linux'
 endif
 
 " coc extensions
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-emmet', 'coc-elixir', 'coc-eslint', 'coc-graphql', 'coc-highlight', 'coc-vimlsp']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-emmet', 'coc-elixir', 'coc-eslint', 'coc-graphql', 'coc-highlight', 'coc-vimlsp', 'coc-sumneko-lua']
 
 
 if $VIM_CRONTAB == "true"
@@ -325,3 +325,5 @@ augroup packer_user_config
   autocmd!
   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup end
+
+let g:vim_json_conceal=0

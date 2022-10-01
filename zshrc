@@ -10,7 +10,8 @@ case `uname` in
   ;;
 esac
 
-~/.local.sh
+# todo: fix this
+# ~/.local.sh
 
 # Android Studio paths for react-native
 # https://reactnative.dev/docs/environment-setup
@@ -51,7 +52,7 @@ zplug "plugins/history",           from:oh-my-zsh
 zplug "plugins/tmux",              from:oh-my-zsh
 zplug "plugins/urltools",          from:oh-my-zsh
 zplug "plugins/web-search",        from:oh-my-zsh
-zplug "plugins/asdf",        from:oh-my-zsh
+# zplug "plugins/asdf",        from:oh-my-zsh
 
 # to move folders really fast (i.e.: `z frontend`)
 zplug "plugins/z",                 from:oh-my-zsh
@@ -138,7 +139,7 @@ alias emojilog='! git log --oneline --color | emojify | less -r'
 
 # GO stuff
 # export PATH=$PATH:/usr/local/go/bin
-# export PATH=$PATH:$(go env GOPATH)/bin
+# export PATH=$PATH:$(personal)/bin
 # export GOPATH=$(go env GOPATH)
 
 current_dir() {
@@ -197,7 +198,7 @@ export PATH=$HOME/.ghcup/bin:$PATH
 alias code=code-insiders
 
 # asdf https://asdf-vm.com/#/core-manage-asdf-vm
-. $(brew --prefix asdf)/asdf.sh
+# . $(brew --prefix asdf)/asdf.sh
 
 # source ~/.local/bin/aws_zsh_completer.sh
 
@@ -245,7 +246,7 @@ alias cra='npx create-react-app --use-npm'
 alias serve='npx http-server'
 
 # keychain
-keychain_add_files=(personal_gh teamflow)
+keychain_add_files=(personal_mac_key)
 for filename in "${keychain_add_files[@]}"; do
   keychain --nogui ~/.ssh/$filename
 done
@@ -270,10 +271,13 @@ if [ -f '/Users/victor/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/vi
 export HISTORY_IGNORE="*token*"
 
 # rust
-source $HOME/.cargo/env
+# source $HOME/.cargo/env
 
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # xata
 export XATA_INSTALL="/Users/victor/.xata"
 export PATH="$XATA_INSTALL/bin:$PATH"
+
+# sync colors with kitty
+eval "kitty @ --to unix:/tmp/kitty-socket set-colors -c $HOME/base16-kitty/colors/$(cat $HOME/.config/.base16_theme).conf"

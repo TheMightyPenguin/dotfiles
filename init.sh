@@ -12,7 +12,6 @@ brew tap homebrew/cask-drivers
 # brew installs
 brew install ripgrep
 brew install the_silver_searcher
-brew install --HEAD luajit
 brew install --HEAD neovim
 brew install pyenv
 brew install zsh
@@ -28,6 +27,7 @@ brew tap homebrew/cask-versions
 
 
 # brew cask apps
+brew install --cask 1password/tap/1password-cli
 brew install --cask rectangle
 brew install --cask spotify
 brew install --cask slack-beta
@@ -44,11 +44,8 @@ brew install --cask kitty
 brew install --cask google-chrome
 brew install --cask logitech-options
 
-
-# install vim plug
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+brew tap homebrew/cask-fonts
+brew install --cask font-iosevka-nerd-font
 
 # install zplug
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
