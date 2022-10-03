@@ -4,8 +4,8 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install rcm
-brew install rcm
 eval "$(/opt/homebrew/bin/brew shellenv)"
+brew install rcm
 
 # Clone dotfiles
 git clone https://github.com/TheMightyPenguin/dotfiles.git ~/.dotfiles
