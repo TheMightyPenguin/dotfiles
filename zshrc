@@ -1,4 +1,8 @@
+# sync colors with kitty
+eval "kitty @ --to unix:/tmp/kitty-socket set-colors -c $HOME/base16-kitty/colors/$(cat $HOME/.config/base16_theme).conf"
+
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 
 # brew
 case `uname` in
@@ -28,7 +32,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Start TMUX automatically
-export ZSH_TMUX_AUTOSTART=true
+# export ZSH_TMUX_AUTOSTART=true
 
 # zplug
 export ZPLUG_HOME=~/.zplug
@@ -156,8 +160,6 @@ function g {
     fi
 }
 
-# # Complete go like git
-compdef g=git
 
 # Custom Prompt
 # PROMPT="╭─[$(echo "%{$terminfo[bold]$FG[228]%}%~%{$reset_color%}")]
@@ -226,7 +228,7 @@ bindkey "^;" clearfn
 
 # fnm
 export PATH=~/.fnm:$PATH
-eval "$(fnm env)"
+eval "$(fnm env --use-on-cd)"
 
 if [[ $OSTYPE = (linux)* ]]; then
     alias oni=/mnt/c/Program\ Files/Onivim2/Oni2.exe
@@ -246,7 +248,7 @@ alias cra='npx create-react-app --use-npm'
 alias serve='npx http-server'
 
 # keychain
-keychain_add_files=(personal_mac_key)
+keychain_add_files=(github)
 for filename in "${keychain_add_files[@]}"; do
   keychain --nogui ~/.ssh/$filename
 done
@@ -279,5 +281,8 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 export XATA_INSTALL="/Users/victor/.xata"
 export PATH="$XATA_INSTALL/bin:$PATH"
 
-# sync colors with kitty
-eval "kitty @ --to unix:/tmp/kitty-socket set-colors -c $HOME/base16-kitty/colors/$(cat $HOME/.config/.base16_theme).conf"
+# # Complete go like git
+compdef g=git
+
+# rustup/cargo
+source "$HOME/.cargo/env"

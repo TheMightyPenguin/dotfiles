@@ -1,5 +1,13 @@
 {
   "sumneko-lua.enableNvimLuaDev": true,
+  "hover.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "suggest.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "javascript",
@@ -48,5 +56,6 @@
       ]
     }
   },
-  "python.linting.flake8Enabled": true
+  "python.linting.flake8Enabled": true,
+  "Lua.telemetry.enable": false
 }

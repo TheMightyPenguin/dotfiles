@@ -1,1 +1,1 @@
-EXCLUDES="README.md rcrc init.sh"
+EXCLUDES="README.md rcrc init.sh setup.sh scripts"
