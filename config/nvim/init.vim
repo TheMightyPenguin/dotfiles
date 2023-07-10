@@ -108,10 +108,5 @@ endif
 
 let g:vim_current_word#highlight_delay = 0
 
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
-
 let g:vim_json_conceal=0
 

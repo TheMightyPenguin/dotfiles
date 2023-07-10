@@ -272,17 +272,33 @@ if [ -f '/Users/victor/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/vi
 
 export HISTORY_IGNORE="*token*"
 
-# rust
-# source $HOME/.cargo/env
-
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # xata
 export XATA_INSTALL="/Users/victor/.xata"
 export PATH="$XATA_INSTALL/bin:$PATH"
 
-# # Complete go like git
+# # Complete g like git
 compdef g=git
+
+alias p=pnpm
+# TODO: fix completions for pnpm
+# compdef p=pnpm
 
 # rustup/cargo
 source "$HOME/.cargo/env"
+export PATH="`brew --prefix ruby`/bin:$PATH"
+export PATH="`gem environment gemdir`/bin:$PATH"
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"
+export NEOVIDE_MULTIGRID=1
+
+# pnpm
+export PNPM_HOME="/Users/victor/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

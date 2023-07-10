@@ -1,6 +1,5 @@
 require('plugins')
 
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -104,9 +103,14 @@ require('lualine').setup {
   }
 }
 
+require('bufferline').setup {
+  animation = true,
+}
+
 require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
+  char = '┆',
+  show_current_context = true,
+  -- show_current_context_start = true,
 }
 
 require('gitsigns').setup {
@@ -261,12 +265,13 @@ local servers = {
   html = {},
   graphql = {},
   cssls = {},
-  sumneko_lua = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
+  -- lua_ls = {},
+  -- sumneko_lua = {
+  --   Lua = {
+  --     workspace = { checkThirdParty = false },
+  --     telemetry = { enable = false },
+  --   },
+  -- },
 }
 
 -- Setup neovim lua configuration
@@ -429,3 +434,36 @@ local autoCommands = {
 }
 
 M.nvim_create_augroups(autoCommands)
+
+if vim.g.neovide then
+  vim.cmd [[set guifont=Iosevka\ Nerd\ Font:h18]]
+  vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
+  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+
+  vim.o.winblend = 70
+  vim.o.pumblend = 70
+  vim.g.neovide_floating_blur_amount_x = 2.0
+  vim.g.neovide_floating_blur_amount_y = 2.0
+  -- vim.g.neovide_cursor_vfx_mode = "pixiedust"
+end
+
+vim.g.neovide_input_use_logo = 1
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+
+-- Helper function for transparency formatting
+-- local alpha = function()
+--   return string.format("%x", math.floor(255 * (vim.g.neovide_transparency_point or 0.8)))
+-- end
+-- -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
+-- vim.g.neovide_transparency = 1
+-- vim.g.transparency = 1
+-- vim.g.neovide_backgrrailgunound_color = "#0f1117" .. alpha()
+
