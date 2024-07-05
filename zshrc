@@ -282,6 +282,7 @@ export PATH="$XATA_INSTALL/bin:$PATH"
 compdef g=git
 
 alias p=pnpm
+alias tf=terraform
 # TODO: fix completions for pnpm
 # compdef p=pnpm
 
@@ -302,3 +303,16 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+#
+
+export FLYCTL_INSTALL="/Users/victor/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# bun completions
+[ -s "/Users/victor/.bun/_bun" ] && source "/Users/victor/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+complete -o nospace -C /opt/homebrew/bin/terraform terraform

@@ -21,6 +21,7 @@ brew install fzf
 brew install fd
 brew install keychain
 brew install gh
+brew install jesseduffield/lazygit/lazygit
 
 
 # allow to install beta version of apps
