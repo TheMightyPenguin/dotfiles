@@ -1,8 +1,7 @@
 # sync colors with kitty
-eval "kitty @ --to unix:/tmp/kitty-socket set-colors -c $HOME/base16-kitty/colors/$(cat $HOME/.config/base16_theme).conf"
+# eval "kitty @ --to unix:/tmp/kitty-socket set-colors -c $HOME/base16-kitty/colors/$(cat $HOME/.config/base16_theme).conf"
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 
 # brew
 case `uname` in
@@ -83,8 +82,8 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # theme
-export PURE_PROMPT_SYMBOL="🐧"
-zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
+# export PURE_PROMPT_SYMBOL="🐧"
+# zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -274,10 +273,6 @@ export HISTORY_IGNORE="*token*"
 
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
-# xata
-export XATA_INSTALL="/Users/victor/.xata"
-export PATH="$XATA_INSTALL/bin:$PATH"
-
 # # Complete g like git
 compdef g=git
 
@@ -316,3 +311,5 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+eval "$(starship init zsh)"

@@ -2,12 +2,11 @@
 
 # Install fnm
 # https://github.com/Schniz/fnm
-curl -fsSL https://fnm.vercel.app/install | bash -s --  --skip-shell
+curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
 # taps
 brew tap aws/tap
 brew tap homebrew/cask-drivers
-
 
 # brew installs
 brew install ripgrep
@@ -22,11 +21,10 @@ brew install fd
 brew install keychain
 brew install gh
 brew install jesseduffield/lazygit/lazygit
-
+brew install starship
 
 # allow to install beta version of apps
 brew tap homebrew/cask-versions
-
 
 # brew cask apps
 brew install --cask 1password/tap/1password-cli
@@ -55,22 +53,19 @@ brew install --cask font-iosevka-nerd-font
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 # install packer
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # wsl specific
-if [[ `uname` == "Linux"   ]]; then
-    if grep -q microsoft /proc/version; then
-        ## Download win32yank
-        wget https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
-        unzip win32yank-x64.zip
-        rm -rf README.md
-        rm -rf LICENSE
-        mv win32yank.exe ~/bin
-    fi
+if [[ $(uname) == "Linux" ]]; then
+	if grep -q microsoft /proc/version; then
+		## Download win32yank
+		wget https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+		unzip win32yank-x64.zip
+		rm -rf README.md
+		rm -rf LICENSE
+		mv win32yank.exe ~/bin
+	fi
 fi
-
 
 # Node
 fnm install 16.17.0
@@ -80,10 +75,8 @@ corepack prepare pnpm@latest --activate
 # this does not work for yarn, figure out why?
 # corepack prepare yarn@latest --activate
 
-
 # Local config files from 1p
-op get item .local.sh --fields notes > .local.sh
+op get item .local.sh --fields notes >.local.sh
 
 # install rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
