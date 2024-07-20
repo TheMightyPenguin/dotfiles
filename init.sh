@@ -22,6 +22,8 @@ brew install keychain
 brew install gh
 brew install jesseduffield/lazygit/lazygit
 brew install starship
+brew install ffmpeg
+brew install exiftool
 
 # allow to install beta version of apps
 brew tap homebrew/cask-versions

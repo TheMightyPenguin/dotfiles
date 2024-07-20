@@ -1,16 +1,26 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
+-- require("bg_toggle")
 
--- For example, changing the color scheme:
 config.color_scheme = "tokyonight_moon"
 
-config.font = wezterm.font("Iosevka Nerd Font", { weight = "Medium" })
+config.font = wezterm.font("Iosevka Term", { weight = "Medium" })
 config.font_size = 18.0
 
--- and finally, return the configuration to wezterm
+config.window_padding = {
+	left = 0,
+	right = 0,
+	top = 8,
+	bottom = 0,
+}
+
+config.window_decorations = "RESIZE"
+config.hide_tab_bar_if_only_one_tab = true
+
+config.window_background_opacity = 0.9
+config.macos_window_background_blur = 20
+config.win32_system_backdrop = "Acrylic"
+
 return config

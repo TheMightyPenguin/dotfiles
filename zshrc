@@ -276,6 +276,9 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # # Complete g like git
 compdef g=git
 
+# navigate to icloud folder
+alias ic='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
+
 alias p=pnpm
 alias tf=terraform
 # TODO: fix completions for pnpm
@@ -312,4 +315,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
+# find . -type f -name "*.wav" -exec sh -c 'ffmpeg.exe -i "$1" -acodec pcm_s16le "${1%.wav}_16bit.wav" && rm "$1"' sh {} \;
+
 eval "$(starship init zsh)"
+
