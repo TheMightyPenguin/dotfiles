@@ -20,7 +20,7 @@ config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 
 config.window_background_opacity = 0.9
-config.macos_window_background_blur = 20
+config.macos_window_background_blur = 35
 config.win32_system_backdrop = "Acrylic"
 
 return config
