@@ -319,3 +319,4 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 eval "$(starship init zsh)"
 
+alias nworker="pnpm create cloudflare@latest"
