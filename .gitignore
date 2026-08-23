@@ -1,0 +1,11 @@
+# nix build outputs
+result
+result-*
+
+# home-manager backups of files it replaced
+*.hm-bak
+
+# machine-local secrets, sourced by zsh if present — never commit
+.local.sh
+
+node_modules
