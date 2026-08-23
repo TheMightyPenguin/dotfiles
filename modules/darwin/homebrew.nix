@@ -25,7 +25,12 @@
       cleanup = "none";
     };
 
-    taps = [ ];
+    # Third-party taps. Homebrew will not load a cask from one of these until
+    # the tap is *trusted* as well — declaring it here only makes `brew tap`
+    # run. See bootstrap.sh, which does the trusting, and the note below.
+    taps = [
+      "nikitabobko/tap" # aerospace
+    ];
 
     brews = [
       # Formulae that genuinely need to be brew-managed (services, or macOS
@@ -36,6 +41,11 @@
     casks = [
       # window management / input
       "rectangle"
+      # From nikitabobko/tap (see taps above), not homebrew-core. It is also
+      # in nixpkgs, but AeroSpace needs macOS Accessibility permission, which
+      # is granted per binary path — a /nix/store path changes on every
+      # update, so you would re-grant it after every `make update`. Homebrew
+      # keeps the path stable.
       "aerospace" # tiling WM
       "karabiner-elements"
       "raycast"

@@ -56,6 +56,19 @@ case "$(uname -s)" in
       [ -x "$prefix/bin/brew" ] && eval "$("$prefix/bin/brew" shellenv)" && break
     done
 
+    # Homebrew refuses to load casks from third-party taps until they are
+    # trusted, and nix-darwin has no option for it (trust lives in
+    # ~/.homebrew/trust.json, outside the store). Running bootstrap.sh is the
+    # point where you accept this repo's choices, so do it here — keep this
+    # list in sync with `taps` in modules/darwin/homebrew.nix.
+    for tap in nikitabobko/tap; do
+      if ! brew tap-info --json "$tap" >/dev/null 2>&1; then
+        brew tap "$tap"
+      fi
+      log "Trusting third-party tap $tap"
+      brew trust "$tap" || true
+    done
+
     log "macOS detected — building nix-darwin config .#$host"
     # First run: darwin-rebuild isn't installed yet, so go through nix run.
     if command -v darwin-rebuild >/dev/null 2>&1; then
