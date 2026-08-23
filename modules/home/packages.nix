@@ -48,6 +48,14 @@
     exiftool
     yt-dlp
 
+    # tools that used to come from third-party Homebrew taps. Every one of
+    # these is in nixpkgs, so the taps (and Homebrew's trust prompt for them)
+    # are unnecessary — see the note in modules/darwin/homebrew.nix.
+    crush # was charmbracelet/tap
+    codecrafters-cli # was codecrafters-io/tap
+    sqld # was libsql/sqld
+    turso # was tursodatabase/tap
+
     # misc
     wget
     curl

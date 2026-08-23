@@ -22,6 +22,8 @@ endif
 bootstrap:
 ifeq ($(UNAME),Darwin)
 	nix build .#darwinConfigurations.$(HOST).system
+	@sudo -v
+	@while kill -0 $$$$ 2>/dev/null; do sudo -n true 2>/dev/null; sleep 30; done &
 	sudo ./result/sw/bin/darwin-rebuild switch --flake .#$(HOST)
 else
 	nix run home-manager/master -- switch --flake .#$(TARGET) -b hm-bak
@@ -30,6 +32,12 @@ endif
 ## Apply the config for this machine
 switch:
 ifeq ($(UNAME),Darwin)
+	@# A switch needs sudo several times over (system activation, then
+	@# Homebrew), and sudo's timestamp expires partway through a long brew
+	@# run. Authenticate once up front, then refresh in the background until
+	@# make exits, so it only ever asks once.
+	@sudo -v
+	@while kill -0 $$$$ 2>/dev/null; do sudo -n true 2>/dev/null; sleep 30; done &
 	sudo darwin-rebuild switch --flake .#$(HOST)
 else
 	home-manager switch --flake .#$(TARGET) -b hm-bak

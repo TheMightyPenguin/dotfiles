@@ -27,7 +27,14 @@
 
     # Third-party taps. Homebrew will not load a cask from one of these until
     # the tap is *trusted* as well — declaring it here only makes `brew tap`
-    # run. See bootstrap.sh, which does the trusting, and the note below.
+    # run. See bootstrap.sh, which does the trusting.
+    #
+    # Keep this list as short as possible: every entry is an arbitrary GitHub
+    # repo whose contents can change under you, which is exactly why Homebrew
+    # started asking. crush, codecrafters, sqld and turso all came from taps
+    # and are all in nixpkgs, so they moved to modules/home/packages.nix and
+    # their taps are gone. aerospace is the only one left, because it needs
+    # macOS Accessibility permission bound to a stable binary path.
     taps = [
       "nikitabobko/tap" # aerospace
     ];

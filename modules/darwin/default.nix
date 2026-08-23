@@ -83,6 +83,22 @@
     LaunchServices.LSQuarantine = false;
   };
 
+  # Touch ID for sudo, which is what makes `make switch` bearable: a switch
+  # takes several sudo calls (activation, then Homebrew), and each one is
+  # otherwise a password prompt.
+  #
+  # `reattach` pulls in pam_reattach, without which Touch ID silently does
+  # nothing inside tmux — the prompt falls back to a password and it looks
+  # broken. Worth having given how much of the work here happens in tmux.
+  #
+  # This writes /etc/pam.d/sudo_local, which macOS 14+ includes automatically
+  # and, unlike editing /etc/pam.d/sudo directly, survives OS updates.
+  security.pam.services.sudo_local = {
+    enable = true;
+    touchIdAuth = true;
+    reattach = true;
+  };
+
   # Karabiner-Elements handles the Hyper key (see ../../scripts/karabiner);
   # caps lock -> control is a system-level toggle worth having regardless.
   system.keyboard = {
