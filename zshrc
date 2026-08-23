@@ -196,8 +196,6 @@ export PATH=$HOME/.ghcup/bin:$PATH
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
-alias code=code-insiders
-
 # asdf https://asdf-vm.com/#/core-manage-asdf-vm
 # . $(brew --prefix asdf)/asdf.sh
 
@@ -259,6 +257,11 @@ function ops {
     eval $(op signin bstinson)
 }
 
+function corepenable() {
+  corepack enable
+  corepack prepare pnpm@latest --activate
+}
+
 alias mongod="mongod --dbpath=$HOME/data/db"
 
 export PATH="$PATH:$HOME/flutter/bin"
@@ -278,6 +281,7 @@ compdef g=git
 
 # navigate to icloud folder
 alias ic='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
+alias samples='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Music/Samples'
 
 alias p=pnpm
 alias tf=terraform
@@ -320,3 +324,10 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 eval "$(starship init zsh)"
 
 alias nworker="pnpm create cloudflare@latest"
+
+alias ovault="cd /Users/victor/Library/Mobile\ Documents/iCloud~md~obsidian/Documents"
+export PATH="$HOME/.local/bin:$PATH"
+
+eval "$(try init ~/src/tries)"
+
+alias cc="claude --dangerously-skip-permissions"

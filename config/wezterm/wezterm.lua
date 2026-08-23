@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 
 config.color_scheme = "tokyonight_moon"
 
-config.font = wezterm.font("Iosevka Term", { weight = "Medium" })
+config.font = wezterm.font("Iosevka", { weight = "Medium" })
 config.font_size = 18.0
 
 config.window_padding = {
