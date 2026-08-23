@@ -15,7 +15,17 @@ else
   endif
 endif
 
-.PHONY: switch update check fmt gc rollback
+.PHONY: bootstrap switch update check fmt gc rollback
+
+## First switch on a machine that has nix but not darwin-rebuild yet.
+## Uses the nix-darwin pinned in flake.lock rather than fetching master.
+bootstrap:
+ifeq ($(UNAME),Darwin)
+	nix build .#darwinConfigurations.$(HOST).system
+	sudo ./result/sw/bin/darwin-rebuild switch --flake .#$(HOST)
+else
+	nix run home-manager/master -- switch --flake .#$(TARGET) -b hm-bak
+endif
 
 ## Apply the config for this machine
 switch:
