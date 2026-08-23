@@ -15,6 +15,17 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Spotlight and the Dock ignore symlinked .app bundles, which is how both
+    # nix-darwin and home-manager expose GUI apps — so a nix-installed app
+    # can't be found with Cmd-Space and won't stay pinned across updates.
+    # mac-app-util generates small "trampoline" launcher apps instead, which
+    # macOS does index. Without it, moving any GUI app to nixpkgs makes it
+    # invisible to Raycast and Spotlight.
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -23,6 +34,7 @@
       nixpkgs,
       home-manager,
       nix-darwin,
+      mac-app-util,
       ...
     }@inputs:
     let
@@ -68,6 +80,7 @@
           inherit specialArgs;
           modules = [
             ./modules/darwin
+            mac-app-util.darwinModules.default
             { nixpkgs.hostPlatform = system; }
             home-manager.darwinModules.home-manager
             {

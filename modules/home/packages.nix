@@ -56,6 +56,20 @@
     sqld # was libsql/sqld
     turso # was tursodatabase/tap
 
+    # GUI apps that are safe to take from nixpkgs: none of them need an
+    # Accessibility / Input Monitoring grant and none install a privileged
+    # daemon, so the two things that break nix-installed Mac apps don't apply.
+    # mac-app-util (see flake.nix) makes them findable in Spotlight/Raycast.
+    # Everything else stays a Homebrew cask — see modules/darwin/homebrew.nix.
+  ]
+  ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+    obsidian
+    discord
+    spotify
+    notion-app
+  ]
+  ++ [
+
     # misc
     wget
     curl

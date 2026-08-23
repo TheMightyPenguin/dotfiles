@@ -83,11 +83,12 @@
       "1password" # GUI app; the `op` CLI comes from nixpkgs
 
       # everything else
-      "spotify"
-      "discord"
+      # spotify, discord, notion and obsidian moved to nixpkgs — see
+      # modules/home/packages.nix. They were the only casks with neither an
+      # Accessibility grant nor a privileged daemon, which is what makes a
+      # nix-installed Mac app painful: macOS binds those grants to the
+      # binary's path, and a /nix/store path changes on every update.
       "telegram-desktop"
-      "notion"
-      "obsidian"
       "logi-options+" # successor to the discontinued logitech-options
     ];
 
