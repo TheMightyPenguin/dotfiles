@@ -125,11 +125,6 @@
           corepack prepare pnpm@latest --activate
         }
 
-        # 1Password CLI session for the bstinson account.
-        function ops {
-          eval "$(op signin bstinson)"
-        }
-
         # ctrl+; to clear the screen
         clearfn() { clear; }
         zle -N clearfn
