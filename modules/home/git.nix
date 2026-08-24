@@ -82,8 +82,18 @@
   programs.gh = {
     enable = true;
     settings = {
+      # Was https before the migration. ssh is the better default here since
+      # ~/.ssh/config routes github.com over port 443 (see ./zsh.nix), which
+      # works from networks that block 22.
       git_protocol = "ssh";
       editor = "nvim";
+
+      # home-manager writes this file wholesale, so anything not declared here
+      # is dropped. `co` was in the hand-written config and would have been
+      # lost silently.
+      aliases = {
+        co = "pr checkout";
+      };
     };
   };
 
