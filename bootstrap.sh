@@ -57,13 +57,17 @@ case "$(uname -s)" in
     done
 
     log "macOS detected — building nix-darwin config .#$host"
-    # First run: darwin-rebuild isn't installed yet, so go through nix run.
-    if command -v darwin-rebuild >/dev/null 2>&1; then
-      sudo darwin-rebuild switch --flake ".#$host"
+    # darwin-rebuild must run as root and does not elevate itself. sudo resets
+    # PATH to secure_path, so it has to be called by absolute path in both
+    # branches, or it fails with "command not found".
+    if [ -x /run/current-system/sw/bin/darwin-rebuild ]; then
+      sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ".#$host"
     else
-      # No sudo here: `sudo nix` usually can't find nix on root's PATH.
-      # darwin-rebuild elevates itself for the system activation step.
-      nix run nix-darwin/master#darwin-rebuild -- switch --flake ".#$host"
+      # First run: darwin-rebuild isn't installed yet. Build it from the
+      # nix-darwin pinned in flake.lock rather than fetching master, so the
+      # first activation uses the same revision as every later one.
+      nix build ".#darwinConfigurations.$host.system"
+      sudo ./result/sw/bin/darwin-rebuild switch --flake ".#$host"
     fi
     ;;
   Linux)

@@ -1,6 +1,12 @@
 UNAME := $(shell uname -s)
 ARCH  := $(shell uname -m)
 
+# Absolute path on purpose: darwin-rebuild must run as root, and sudo resets
+# PATH to secure_path, which does not include /run/current-system/sw/bin — so
+# plain `sudo darwin-rebuild` fails with "command not found" even when it is
+# on your own PATH. /run/current-system always points at the live generation.
+DARWIN_REBUILD := /run/current-system/sw/bin/darwin-rebuild
+
 ifeq ($(UNAME),Darwin)
   ifeq ($(ARCH),x86_64)
     HOST := penguin-intel
@@ -38,7 +44,7 @@ ifeq ($(UNAME),Darwin)
 	@# make exits, so it only ever asks once.
 	@sudo -v
 	@while kill -0 $$$$ 2>/dev/null; do sudo -n true 2>/dev/null; sleep 30; done &
-	sudo darwin-rebuild switch --flake .#$(HOST)
+	sudo $(DARWIN_REBUILD) switch --flake .#$(HOST)
 else
 	home-manager switch --flake .#$(TARGET) -b hm-bak
 endif
@@ -62,7 +68,7 @@ gc:
 ## List generations you can roll back to
 rollback:
 ifeq ($(UNAME),Darwin)
-	darwin-rebuild --list-generations
+	$(DARWIN_REBUILD) --list-generations
 else
 	home-manager generations
 endif
