@@ -26,6 +26,8 @@ in
     xdg.configFile = {
       "nvim".source = link "config/nvim";
       "ghostty".source = link "config/ghostty";
+      # Kept as a file rather than generated — see ./starship.nix.
+      "starship.toml".source = link "config/starship.toml";
       "wezterm".source = link "config/wezterm";
       "zellij".source = link "config/zellij";
       "kitty".source = link "config/kitty";
