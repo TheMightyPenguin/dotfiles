@@ -25,6 +25,7 @@ in
 
     xdg.configFile = {
       "nvim".source = link "config/nvim";
+      "ghostty".source = link "config/ghostty";
       "wezterm".source = link "config/wezterm";
       "zellij".source = link "config/zellij";
       "kitty".source = link "config/kitty";

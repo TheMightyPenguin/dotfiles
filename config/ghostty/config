@@ -1,0 +1,21 @@
+# Theme
+theme = TokyoNight
+
+# Font
+# "Iosevka Term" is the plain build and carries no Powerline or nerd glyphs,
+# which is what blanked out the starship prompt's separators and branch icon.
+# The nerd-font build has the same shapes plus the symbol range. Repeated
+# font-family entries are Ghostty's fallback chain, in order.
+font-family = IosevkaTerm Nerd Font
+font-family = Symbols Nerd Font Mono
+font-style = SemiBold
+
+# Background
+background-opacity = 0.95
+background-blur-radius = 25
+font-size = 18
+
+# Window
+macos-titlebar-style = transparent
+window-padding-x = 2
+window-padding-y = 0
