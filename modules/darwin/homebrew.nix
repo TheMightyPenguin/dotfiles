@@ -36,7 +36,19 @@
     # their taps are gone. aerospace is the only one left, because it needs
     # macOS Accessibility permission bound to a stable binary path.
     taps = [
-      "nikitabobko/tap" # aerospace
+      # `trusted = true` puts `trusted: true` on this tap's Brewfile entry, so
+      # `brew bundle` trusts it during activation. That's what makes a switch
+      # work unattended — Homebrew 6.0 turned on HOMEBREW_REQUIRE_TAP_TRUST,
+      # which otherwise aborts activation on any non-official tap.
+      #
+      # Trusting a tap means trusting every current and future formula and
+      # cask in an arbitrary GitHub repo. That's a real decision, but it's one
+      # made here, in a reviewed commit, rather than typed into a prompt and
+      # forgotten — which is the better place for it.
+      {
+        name = "nikitabobko/tap"; # aerospace
+        trusted = true;
+      }
     ];
 
     brews = [
